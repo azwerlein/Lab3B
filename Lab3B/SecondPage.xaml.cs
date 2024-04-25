@@ -31,6 +31,11 @@ public partial class SecondPage : ContentPage
 
     private void AnswerQuestion(bool answer)
     {
+        if (index >= questions.Count)
+        {
+            return;
+        }
+        
         if (answer)
         {
             questions[index].Personality.Value++;
@@ -40,30 +45,17 @@ public partial class SecondPage : ContentPage
         if (index >= questions.Count)
         {
             string type = "results oriented";
-            if (qualityOriented.Value > resultsOriented.Value)
+            img.Source = "images/trophy.jpg";
+            if (qualityOriented > resultsOriented)
             {
                 type = "quality oriented";
+                img.Source = "images/clipboard.jpg";
             }
             questionLabel.Text = $"Your personality is: {type}";
-            noButton.IsVisible = false;
-            yesButton.IsVisible = false;
         }
         else
         {
             WriteQuestion();
-        }
-    }
-
-    private void OnSwiped(object? sender, SwipedEventArgs e)
-    {
-        switch (e.Direction)
-        {
-            case SwipeDirection.Left:
-                AnswerQuestion(false);
-                break;
-            case SwipeDirection.Right:
-                AnswerQuestion(true);
-                break;
         }
     }
 
@@ -74,7 +66,7 @@ public partial class SecondPage : ContentPage
 
     private void OnNo(Object sender, EventArgs e)
     {
-        AnswerQuestion(true);
+        AnswerQuestion(false);
     }
 
     class Question

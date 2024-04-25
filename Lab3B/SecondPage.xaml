@@ -5,6 +5,10 @@
              x:Class="Lab3B.SecondPage">
     <ContentPage.Content>
         <Grid>
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Swiped="OnNo" />
+            <SwipeGestureRecognizer Direction="Right" Swiped="OnYes" />
+        </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -18,19 +22,11 @@
             <Label
                 x:Name="questionLabel"
                 Grid.ColumnSpan="2"
-                Grid.Row="1">
-            </Label>
-            <Button
-                x:Name="noButton"
-                Text="False"
-                Clicked="OnNo"
-                Grid.Row="2" />
-            <Button
-                x:Name="yesButton"
-                Text="True"
-                Clicked="OnYes"
+                Grid.Row="1" />
+            <Label
+                Text="Swipe left for no and right for yes."
                 Grid.Row="2"
-                Grid.Column="1" />
+                Grid.ColumnSpan="2" />
             <Image
                 x:Name="img"
                 Source="dog"

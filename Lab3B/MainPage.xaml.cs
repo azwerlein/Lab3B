@@ -31,6 +31,11 @@ public partial class MainPage : ContentPage
 
     private void AnswerQuestion(bool answer)
     {
+        if (index >= questions.Count)
+        {
+            return;
+        }
+
         if (answer)
         {
             questions[index].Personality.Value++;
@@ -40,9 +45,11 @@ public partial class MainPage : ContentPage
         if (index >= questions.Count)
         {
             string type = "results oriented";
+            img.Source = "images/trophy.jpg";
             if (qualityOriented > resultsOriented)
             {
                 type = "quality oriented";
+                img.Source = "images/clipboard.jpg";
             }
             questionLabel.Text = $"Your personality is: {type}";
             noButton.IsVisible = false;
@@ -74,7 +81,7 @@ public partial class MainPage : ContentPage
 
     private void OnNo(Object sender, EventArgs e)
     {
-        AnswerQuestion(true);
+        AnswerQuestion(false);
     }
 
     class Question
